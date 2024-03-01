@@ -41,7 +41,20 @@ namespace Lab2CSharp
                         break;
                     }
                 case 3:
-
+                    Console.Write("Enter the number of rows: ");
+                    int rows = int.Parse(Console.ReadLine());
+                    Console.Write("Enter the number of columns: ");
+                    int cols = int.Parse(Console.ReadLine());
+                    int[][] twoDimArray = entering_two_dim_arr(rows, cols);
+                    Console.WriteLine("Original array:");
+                    PrintArray(twoDimArray, rows, cols);
+                    if (cols % 2 == 0){
+                        SwapMiddleColumns(twoDimArray, rows, cols);
+                    } else{
+                        SwapFirstAndMiddleColumn(twoDimArray, rows, cols);
+                    }
+                    Console.WriteLine("Result:");
+                    PrintArray(twoDimArray, rows, cols);
                     break;
                 case 4:
                     break;
@@ -129,6 +142,32 @@ namespace Lab2CSharp
             Console.WriteLine($"Index of the last maximum element: {lastIndex + 1}");
         }
 
- 
+        static void SwapMiddleColumns(int[][] arr, int rows, int cols){
+            int middleColumn1 = cols / 2 - 1;
+            int middleColumn2 = cols / 2;
+            for (int i = 0; i < rows; i++){
+                int temp = arr[i][middleColumn1];
+                arr[i][middleColumn1] = arr[i][middleColumn2];
+                arr[i][middleColumn2] = temp;
+            }
+        }
+
+        static void SwapFirstAndMiddleColumn(int[][] arr, int rows, int cols){
+            int middleColumn = cols / 2;
+            for (int i = 0; i < rows; i++){
+                int temp = arr[i][0];
+                arr[i][0] = arr[i][middleColumn];
+                arr[i][middleColumn] = temp;
+            }
+        }
+        
+        static void PrintArray(int[][] arr, int rows, int cols){
+            for (int i = 0; i < rows; i++){
+                for (int j = 0; j < cols; j++){
+                    Console.Write(arr[i][j] + "\t");
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }
