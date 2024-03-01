@@ -34,9 +34,14 @@ namespace Lab2CSharp
                     }
                 case 2:
                     {
+                        Console.Write("Enter the n: ");
+                        int n = int.Parse(Console.ReadLine());
+                        int[] oneDimArray = entering_one_dim_arr(n);
+                        Task2(oneDimArray);
                         break;
                     }
                 case 3:
+
                     break;
                 case 4:
                     break;
@@ -104,6 +109,26 @@ namespace Lab2CSharp
             Console.WriteLine($"Number of odd elements in the two-dimensional array: {count}");
         }
 
-  
+        static void Task2(int[] arr){
+            if (arr.Length == 0){
+                Console.WriteLine("The array is empty. There is no maximum element.");
+                return;
+            }
+
+            int max = arr[0];
+            int lastIndex = 0;
+
+            for (int i = 1; i < arr.Length; i++){
+                if (arr[i] >= max)
+                {
+                    max = arr[i];
+                    lastIndex = i;
+                }
+            }
+
+            Console.WriteLine($"Index of the last maximum element: {lastIndex + 1}");
+        }
+
+ 
     }
 }
