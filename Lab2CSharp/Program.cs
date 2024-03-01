@@ -18,8 +18,8 @@ namespace Lab2CSharp
                         if (t == 1)
                         {
                             Console.Write("Enter the n: ");
-                            int n = int.Parse(Console.ReadLine());
-                            int[] oneDimArray = entering_one_dim_arr(n);
+                            int size = int.Parse(Console.ReadLine());
+                            int[] oneDimArray = entering_one_dim_arr(size);
                             Task1_1(oneDimArray);
                         }
                         else{
@@ -35,8 +35,8 @@ namespace Lab2CSharp
                 case 2:
                     {
                         Console.Write("Enter the n: ");
-                        int n = int.Parse(Console.ReadLine());
-                        int[] oneDimArray = entering_one_dim_arr(n);
+                        int n_1 = int.Parse(Console.ReadLine());
+                        int[] oneDimArray = entering_one_dim_arr(n_1);
                         Task2(oneDimArray);
                         break;
                     }
@@ -57,6 +57,18 @@ namespace Lab2CSharp
                     PrintArray(twoDimArray, rows, cols);
                     break;
                 case 4:
+                    Console.Write("Enter the number of rows (n): ");
+                    int n = int.Parse(Console.ReadLine());
+                    Console.Write("Enter the number of columns (m): ");
+                    int m = int.Parse(Console.ReadLine());
+
+                    int[][] pascalsTriangle = GeneratePascalsTriangle(n);
+                    Console.WriteLine("Pascal's Triangle:");
+                    PrintArray(pascalsTriangle, n, n);
+
+                    int[] lastEvenElements = FindLastEvenElements(pascalsTriangle);
+                    Console.WriteLine("Last Even Elements in Each Row:");
+                    PrintOneDimensionalArray(lastEvenElements);
                     break;
                 default:
                     Console.WriteLine("Invalid choice!");
@@ -163,11 +175,51 @@ namespace Lab2CSharp
         
         static void PrintArray(int[][] arr, int rows, int cols){
             for (int i = 0; i < rows; i++){
-                for (int j = 0; j < cols; j++){
+                for (int j = 0; j < arr[i].Length; j++){
                     Console.Write(arr[i][j] + "\t");
                 }
-                Console.WriteLine();
+            Console.WriteLine();
             }
         }
+
+        static int[][] GeneratePascalsTriangle(int n){
+        int[][] triangle = new int[n][];
+        for (int i = 0; i < n; i++)
+        {
+            triangle[i] = new int[i + 1];
+            for (int j = 0; j <= i; j++)
+            {
+                if (j == 0 || j == i)
+                    triangle[i][j] = 1;
+                else
+                    triangle[i][j] = triangle[i - 1][j - 1] + triangle[i - 1][j];
+            }
+        }
+        return triangle;
+        }
+
+        static int[] FindLastEvenElements(int[][] triangle){
+            int[] lastEvenElements = new int[triangle.Length];
+            
+            for (int i = 0; i < triangle.Length; i++){
+                int lastEven = 0;
+                for (int j = triangle[i].Length - 1; j >= 0; j--){
+                    if (triangle[i][j] % 2 == 0){
+                        lastEven = triangle[i][j];
+                        break;
+                    }
+                }
+                lastEvenElements[i] = lastEven;
+            }
+        return lastEvenElements;
+        }
+
+    static void PrintOneDimensionalArray(int[] arr){
+        Console.Write("Array: ");
+        foreach (var element in arr){
+            Console.Write(element + " ");
+        }
+        Console.WriteLine();
+    }
     }
 }
