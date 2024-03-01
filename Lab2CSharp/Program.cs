@@ -63,7 +63,7 @@ namespace Lab2CSharp
                     int m = int.Parse(Console.ReadLine());
 
                     int[][] pascalsTriangle = GeneratePascalsTriangle(n);
-                    Console.WriteLine("Pascal's Triangle:");
+                    Console.WriteLine("Array:");
                     PrintArray(pascalsTriangle, n, n);
 
                     int[] lastEvenElements = FindLastEvenElements(pascalsTriangle);
@@ -213,13 +213,13 @@ namespace Lab2CSharp
             }
         return lastEvenElements;
         }
-
-    static void PrintOneDimensionalArray(int[] arr){
-        Console.Write("Array: ");
-        foreach (var element in arr){
-            Console.Write(element + " ");
+        
+        static void PrintOneDimensionalArray(int[] arr){
+            Console.Write("Array: ");
+            foreach (var element in arr){
+                Console.Write(element + " ");
+            }
+            Console.WriteLine();
         }
-        Console.WriteLine();
-    }
     }
 }
